@@ -1,0 +1,36 @@
+<!-- 
+    The most basic web map you can get using Leaflet.
+    It's a map centered on the University of Minnesota Duluth campus.
+    And it uses OpenStreetMap tiles for the basemap layer.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Basic Web Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style></style>
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize the map, center it on UMD campus, and set the zoom level
+        const map = L.map('map').setView([46.82, -92.08], 13);
+
+        // Add OpenStreetMap tiles
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            referrerPolicy: 'strict-origin-when-cross-origin'
+        }).addTo(map);
+    </script>
+</body>
+</html>

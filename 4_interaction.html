@@ -1,0 +1,53 @@
+<!-- 
+    Assignment 4: Interactivity
+
+    In this assignment, you will improve the overall user experience by adding some interactivity to the web map.
+
+    Tasks:
+
+    1. This assignment starts from where you left off with assignment 3.
+    So the first task is to copy your code from that file and paste it below these comments.
+    (no need to copy the comments from that assignment--just the code itself)
+
+    2. Load spreadsheet (CSV) data as Leaflet markers
+
+    There is a CSV file called duluth_schools.csv. 
+    This is data that I downloaded from the MN Geocommons and re-formatted to include a limited number of columns 
+    and only public schools in Duluth. The source for this data is the "Minnesota Department of Education".
+
+    Add this data to your map as markers. 
+    - You can use the "Lat" and "Lng" columns to place the markers in the correct locations.
+    - Try Googling "Leaflet csv" for a number of options for how to do this.
+    - One of the most basic of these is leaflet-omnivore (which handles much more than just CSV files)
+    - You can also add the CSV data on your own and then use a library like papaparse to put it into a format that can be used to create markers.
+    
+    3. Adding Interactivity - linking schools to attendance areas
+
+    We now have a point layer showing the locations of schools and a polygon layer showing the attendance areas.
+    It would be nice if we could link these two layers together so that when a user clicks on one of the layers, 
+    they get information about the other layer.
+
+    You have two options:
+    Option 1: clicking on a school will display the attendance area for that school.
+    Option 2: clicking on an attendance area will display the schools for that area.   
+
+    To do this, you will need to add event listeners for the layer that the user will be clicking on, 
+    and then write a function that will find the corresponding features in the other layer and then filter that layer
+    to only display those features.
+
+    You are only required to complete one of the above options, but completing both will earn you bonus points.
+
+    4. Modify your layout to reflect the new utility of the map: namely, that it can be used to 
+    find the attendance area for a school or the schools for an attendance area.
+    Add or modiify any HTML and CSS to make the map more user-friendly and visually appealing.
+
+    BONUS (10pts): change the marker icons to something more appropriate for schools 
+    - see the Leaflet tutorial for how to do this: https://leafletjs.com/examples/custom-icons/
+    - or use a plugin like Leaflet Awesome Markers: https://github.com/lennardv2/Leaflet.awesome-markers
+    BONUS (10pts): do both of the interactivity options described in task 3
+
+    AI use: you can use AI as much as you like, but make sure to understand and verify the code it generates.
+    I expect every block of code to have a comment above it describing what it does and how it works. 
+-->
+
+<!-- Paste your code from assignment 3 here -->

@@ -1,0 +1,78 @@
+<!-- 
+    Assignment 3: Adding GeoJSON to a Web Map
+
+    In this assignment, you will add a GeoJSON of school attendance areas for Duluth to your web map. 
+    You will also customize the styling and popups for the GeoJSON layer.
+
+    Tasks:
+
+    1. Download and simplify School Attendance Area Boundaries
+
+    I downloaded this data from the MnGeoCommons. The source for the data is the Minnesota Department of Education. 
+    The data has been filtered to the Duluth Public School District and re-projected to WGS 84 (EPSG:4326) 
+    to make it compatible with our Leaflet map.
+    In this step you will use Mapshaper to convert (and optimally simplify) the shapefile to GeoJSON format.
+
+        - Download the data: https://github.com/kristofj-umd/webdev-unit/raw/master/duluth_school_attendance_areas.zip
+        - Load the zipped shapefile into https://mapshaper.org/ (or your GIS software of choice)
+        - Simplify the geometry. Play around with the simplification settings until you find one you like.
+        - Export the data as a GeoJSON
+            - Further simplify the data by specifying a coordinate precision in the export command line options
+                 by typing in precision=0.001
+
+    2. Add GeoJSON of Attendance Areas to the map
+    Make sure to credit the source of the data by adding an attribution for it to the map.
+        - Leaflet GeoJSON tutorial: https://leafletjs.com/examples/geojson/
+        - GeoJSON reference: https://geojson.org/
+
+    3. Update GeoJSON Styling
+    Create a style function to customize the styling for your Attendance Areas.
+        - To help distinguish the areas from one another consider using a random color generator. 
+            - Lots of options are listed here: https://stackoverflow.com/questions/1484506/random-color-generator
+
+    4. Add Popups to GeoJSON
+    Add functionality so that when the user clicks on an attendance area, the schools for that area are listed in the popup.
+
+    5. Add a Layout
+    - Add some HTML and CSS to your web page to complement your map. 
+    - At a minimum, this should include a title and subtitle for your map, but feel free to get creative and add some style!
+    
+    6. Finishing Up
+        - In case it wasn't already obvious, you've created a thematic map. 
+            That means you might need to update your basemap to something more plain and subdued (think figure-ground).
+        - Also modify the map extent (so you can see all but the large northern attendance areas).
+        - Make sure the code is organized and well commented so that someone else can understand what you did and how you did it.
+
+    AI use: you can use AI as much as you like, but make sure to understand and verify the code it generates.
+    I expect every block of code to have a comment above it describing what it does and how it works. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Basic Web Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style></style>
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize the map, center it on UMD campus, and set the zoom level
+        const map = L.map('map').setView([46.82, -92.08], 13);
+
+        // Add OpenStreetMap tiles
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!-- 
+    Assignment 1: Find and Fix the Bugs
+    This web map has 6 bugs in it. Your job is to find and fix them using the browser's Developer Tools.
+
+    To open Developer Tools press F12, or right-click the page and select "Inspect".
+
+    You will need to use:
+        - The Console tab: shows JavaScript errors with line numbers and descriptions.
+        - The Elements tab: shows the actual HTML structure of the page as the browser sees it. 
+          You can also see the CSS styles applied to any element here.
+        - (Optional) The Network tab: shows all files and resources the page tried to load.
+
+    When the map is working correctly, you should see:
+        1. A title ("A Working Web Map") and subtitle visible at the top of the page
+        2. A map with a red border around it showing the the UMD campus
+        3. A basemap using OpenStreetMap tiles (not a blank grey box)
+
+    Tips:
+        - Fix the bugs one at a time. After each fix, save the file, refresh the page, and check the console again.
+        - Read the error messages carefully — they usually tell you exactly what's wrong and on which line.
+        - If something looks wrong visually but there's no console error, try using the Elements tab to inspect the element.
+
+    For each bug that you find and fix, leave a comment in the code describing:
+        - What was the problem?
+        - What tool helped you find it?
+        - How did you fix it?
+        
+    AI use: you can ask questions of AI (such as "I'm getting this error (paste in error)" or "why isn't the title on this page showing up?") 
+    Use it to make sense of and understand the code. But make the actual fixes yourself. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Broken Web Map</title>
+    
+    <!-- Leaflet CSS stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- start of our CSS styles -->
+    <style>
+        h1 {
+            color: white;
+        }
+        .map {
+            border: 4px solid red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header at the top of the page -->
+    <div class="header">
+        <h1>A Working Web Map</h1>
+    </div>
+    
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    
+    <!-- start of our JavaScript code -->
+    <script>
+        // Initialize the map
+        let map = L.map('mapElement')
+        // Center the map on UMD campus, and set the zoom level
+        map.setView([-92.08, 46.82], 15);
+        
+        // Add OpenStreetMap tiles
+        const tiles = L.tileLayer('https://tile.openstreetmap.orgg/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+        
+    <!-- Leaflet JavaScript library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
