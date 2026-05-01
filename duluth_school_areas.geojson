@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Central Duluth Schools",
+        "schools": "Duluth Central High School"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-92.15, 46.75],
+          [-92.05, 46.75],
+          [-92.05, 46.85],
+          [-92.15, 46.85],
+          [-92.15, 46.75]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Denfeld Area Schools",
+        "schools": "Duluth Denfeld High School"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-92.05, 46.75],
+          [-92.0, 46.75],
+          [-92.0, 46.82],
+          [-92.05, 46.82],
+          [-92.05, 46.75]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "East Duluth Schools",
+        "schools": "Duluth East High School"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-92.0, 46.75],
+          [-91.95, 46.75],
+          [-91.95, 46.85],
+          [-92.0, 46.85],
+          [-92.0, 46.75]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "West Duluth Schools",
+        "schools": "Multiple West Duluth Schools"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-92.15, 46.85],
+          [-92.05, 46.85],
+          [-92.05, 46.92],
+          [-92.15, 46.92],
+          [-92.15, 46.85]
+        ]]
+      }
+    }
+  ]
+}
