@@ -25,47 +25,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Most Basic Web Map</title>
+    <title>Cool Spots in Duluth Map</title>
     
     <!-- Leaflet CSS stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f3a5f;
+        }
 
-        /* full page leaflet map */
-        
+        .header {
+            text-align: center;
+            padding: 28px 18px 10px;
+            background: linear-gradient(135deg, #315f9f, #2a3e7e);
+            color: white;
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            letter-spacing: 0.03em;
+        }
+
+        .header h3 {
+            margin: 10px 0 0;
+            font-weight: 400;
+            font-size: 1.05rem;
+        }
+
+        .description {
+            max-width: 960px;
+            margin: 22px auto 0;
+            padding: 0 16px;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #33415c;
+        }
+
+        #map {
+            width: min(1100px, calc(100% - 32px));
+            height: 680px;
+            margin: 28px auto 40px;
+            border-radius: 18px;
+            box-shadow: 0 22px 40px rgba(20, 40, 70, 0.16);
+        }
+
+        .leaflet-container {
+            border-radius: 18px;
+        }
     </style>
 </head>
 <body>
     <!-- Header at the top of the page -->
     <div class="header">
-        <h1>A Mostly Basic Web Map</h1>
-        <h3>by: Your Name Here</h3>
+        <h1>Places to check out in Duluth</h1>
+        <h3>by: Milo Hubley</h3>
     </div>
-    <div id="map" style="width: 600px; height: 400px;"></div>
+
+    <p class="description">
+        This map shows and highlights some cool places around Duluth that would be fun to visit for travelers and locals. I picked out some of my favorite spots that I love to stop by, so I'm sure anyone else with access to this map would love to see them too.
+    </p>
+
+    <div id="map"></div>
     
     <!-- Leaflet JavaScript library -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
-        // Initialize the map, center it on UMD campus, and set the zoom level
-        const map = L.map('map').setView([46.82, -92.08], 13);
+        // Center the map on Duluth and choose a zoom level that shows the city.
+        const map = L.map('map').setView([46.7867, -92.1005], 12);
 
-        // Add Esri Satellite tiles
-        const tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        // Tile layer from CartoDB Positron.
+        const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
         });
-        // add tiles to the map
         tiles.addTo(map);
 
-        // add marker at Hartley Nature Center
-        const hartleyMarker = L.marker([46.835, -92.089]).addTo(map);
-        hartleyMarker.bindPopup("<b>Hartley Nature Center</b><br>A great place to hike and see wildlife!").openPopup();
+        const places = [
+            {
+                name: 'Glensheen Mansion',
+                coords: [46.8150, -92.0517],
+                info: 'A historic house museum with beautiful gardens right in the shore of Lake Superior.'
+            },
+            {
+                name: 'Miller Hill Mall',
+                coords: [46.8021, -92.1559],
+                info: 'A large shopping destination with stores, restaurants, and easy access.'
+            },
+            {
+                name: 'Park Point Beach',
+                coords: [46.7717, -92.0878],
+                info: 'A long beach point far out into Lake Superior, lots of great views and picnicing spots.',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Park_Point_Beach_Duluth_MN.jpg/320px-Park_Point_Beach_Duluth_MN.jpg'
+            }
+        ];
 
+        places.forEach(place => {
+            const marker = L.marker(place.coords).addTo(map);
+            let popupHtml = `<b>${place.name}</b><br>${place.info}`;
 
-        // Add a marker for the UMD campus
-        const marker = L.marker([46.82, -92.085]).addTo(map);
-        marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!").openPopup();
+            if (place.image) {
+                popupHtml += `<br><img src="${place.image}" alt="${place.name}" style="width: 100%; border-radius: 10px; margin-top: 8px;">`;
+            }
+
+            marker.bindPopup(popupHtml);
+        });
     </script>
 </body>
 </html>
