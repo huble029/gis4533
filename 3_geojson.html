@@ -95,7 +95,7 @@
     <script>
         // Function to generate a random color for each attendance area
         function getRandomColor() {
-            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2', '#FFB347', '#6A5ACD', '#5F9EA0'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
         
@@ -116,12 +116,13 @@
         
         // Style function - applies colors and styling to each feature
         function style(feature) {
-            const featureName = feature.properties.name;
-            if (!featureColors[featureName]) {
-                featureColors[featureName] = getRandomColor();
+            const props = feature.properties || {};
+            const featureKey = [props.SDNUMBER, props.ELEM_NAME, props.MIDD_NAME, props.HIGH_NAME].join('|');
+            if (!featureColors[featureKey]) {
+                featureColors[featureKey] = getRandomColor();
             }
             return {
-                fillColor: featureColors[featureName],
+                fillColor: featureColors[featureKey],
                 weight: 2,
                 opacity: 1,
                 color: '#666',
@@ -130,13 +131,22 @@
             };
         }
         
-        // Function to handle interactions - popups and hover effects
+        // Create popup text and hover interactions for each feature
         function onEachFeature(feature, layer) {
-            // Create popup with school information
-            const popupContent = `<strong>${feature.properties.name}</strong><br>Schools: ${feature.properties.schools}`;
-            layer.bindPopup(popupContent);
+            const props = feature.properties || {};
+            const districtName = props.SDPREFNAME || 'Duluth Public School District';
+            const elementary = props.ELEM_NAME || 'Unknown elementary';
+            const middle = props.MIDD_NAME || 'Unknown middle';
+            const high = props.HIGH_NAME || 'Unknown high';
+            const schoolInfo = `
+                <strong>${districtName}</strong><br>
+                <strong>Elementary:</strong> ${elementary}<br>
+                <strong>Middle:</strong> ${middle}<br>
+                <strong>High:</strong> ${high}<br>
+                <strong>District:</strong> ${props.SDNUMBER || 'N/A'}
+            `;
+            layer.bindPopup(schoolInfo);
             
-            // Highlight on hover
             layer.on('mouseover', function () {
                 this.setStyle({ weight: 3, color: '#000', fillOpacity: 0.9 });
             });
@@ -147,6 +157,8 @@
         }
         
         // Fetch and add GeoJSON to the map
+        // Keep the map centered on Duluth so the main attendance areas are visible
+        // without zooming out to the large northern extents in the dataset.
         fetch('duluth_school_areas.geojson')
             .then(response => response.json())
             .then(data => {
